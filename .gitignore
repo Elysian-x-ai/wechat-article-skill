@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 技能运行时的中间产物（由脚本生成，不入库）
+plan.json
+cdn.json
+layout.txt
+
+# 用户本地的账号配置（含账号信息，不入库）
+wechat-article.config.json
+
+# 编辑器
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

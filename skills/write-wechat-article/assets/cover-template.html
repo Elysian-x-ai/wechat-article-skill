@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>公众号封面 900×383</title>
+<!--
+  用法：替换下面 {{...}} 占位符 → 用浏览器打开 → 截图 900×383 存成 images/cover-900x383.png
+  出变体：只改 :root 里的色值（3 个变量）＋ 改标题措辞，能生成 2-3 个方案让用户挑。
+  约束：900×383 固定，正文不超过 3 行（44px 下每行约 14 个汉字）。
+-->
+<style>
+  :root{
+    --bg-1:#0b1220; --bg-2:#132343; --bg-3:#1b3a6b;      /* 背景渐变三点 */
+    --glow-1:rgba(96,165,250,.42); --glow-2:rgba(37,99,235,.38);
+    --accent:#60a5fa; --accent-soft:#bfdbfe; --accent-line:rgba(147,197,253,.42);
+    --hl-1:#93c5fd; --hl-2:#38bdf8; --hl-3:#a5b4fc;      /* 标题高亮渐变 */
+    --ring:#f59e0b; --ring-num:#fbbf24;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:900px; height:383px; overflow:hidden; }
+  body {
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    background:
+      radial-gradient(1100px 520px at 88% -20%, var(--glow-1), transparent 62%),
+      radial-gradient(760px 420px at 6% 118%, var(--glow-2), transparent 60%),
+      linear-gradient(118deg, var(--bg-1) 0%, var(--bg-2) 46%, var(--bg-3) 100%);
+    position:relative; color:#fff;
+  }
+  .grid {
+    position:absolute; inset:0; opacity:.14;
+    background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+    background-size:38px 38px;
+    mask-image:radial-gradient(620px 300px at 22% 46%,#000 20%,transparent 78%);
+    -webkit-mask-image:radial-gradient(620px 300px at 22% 46%,#000 20%,transparent 78%);
+  }
+  .wrap { position:relative; height:100%; display:flex; align-items:center; padding:0 44px; gap:34px; }
+  .left { flex:1 1 auto; min-width:0; }
+  .badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(96,165,250,.16); border:1px solid var(--accent-line);
+    color:var(--accent-soft); font-size:13px; letter-spacing:.6px;
+    padding:5px 12px; border-radius:999px; margin-bottom:16px; font-weight:600;
+  }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px 2px rgba(96,165,250,.85); }
+  h1 { font-size:44px; line-height:1.16; letter-spacing:-.5px; font-weight:800; }
+  h1 .hl { background:linear-gradient(96deg,var(--hl-1),var(--hl-2) 60%,var(--hl-3)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .sub { margin-top:14px; font-size:17px; line-height:1.5; color:#cbd5e1; max-width:430px; }
+  .steps { margin-top:20px; display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--hl-1); font-weight:600; }
+  .steps i { font-style:normal; color:#475569; }
+  .right { flex:0 0 232px; position:relative; height:270px; }
+  /* 右侧视觉：默认是"文档 + 评分环"。换成时钟/图表等只需替换这一块的结构 */
+  .paper {
+    position:absolute; width:200px; height:258px; border-radius:10px;
+    background:linear-gradient(170deg,#f8fafc,#e2e8f0);
+    box-shadow:0 26px 50px rgba(2,6,23,.62); padding:16px 15px;
+  }
+  .p1 { left:0; top:12px; transform:rotate(-7deg); opacity:.62; }
+  .p2 { left:26px; top:0; transform:rotate(3deg); }
+  .bar { height:7px; border-radius:4px; background:#94a3b8; margin-bottom:8px; }
+  .b-name { width:56%; height:12px; background:#1e293b; border-radius:5px; margin-bottom:6px; }
+  .b-role { width:74%; background:#3b82f6; margin-bottom:13px; }
+  .sec { height:6px; width:38%; background:#cbd5e1; border-radius:3px; margin:11px 0 8px; }
+  .line { height:5px; border-radius:3px; background:#cbd5e1; margin-bottom:6px; }
+  .w90{width:90%}.w78{width:78%}.w84{width:84%}.w62{width:62%}.w70{width:70%}
+  .ring {
+    position:absolute; right:-6px; bottom:-4px; width:96px; height:96px; border-radius:50%;
+    background:conic-gradient(var(--ring) 0 75%, rgba(15,23,42,.55) 75% 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 34px rgba(2,6,23,.6);
+  }
+  .ring .inner { width:76px; height:76px; border-radius:50%; background:var(--bg-1);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .ring .num { font-size:27px; font-weight:800; color:var(--ring-num); line-height:1; }
+  .ring .cap { font-size:9.5px; color:#94a3b8; margin-top:3px; letter-spacing:.5px; }
+  .foot { position:absolute; left:44px; bottom:18px; font-size:12px; color:#64748b; letter-spacing:.8px; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="wrap">
+    <div class="left">
+      <div class="badge"><span class="dot"></span>{{BADGE}}</div>
+      <h1>{{TITLE_L1}}<br>{{TITLE_L2_BEFORE}}<span class="hl">{{TITLE_L2_HL}}</span>{{TITLE_L2_AFTER}}</h1>
+      <div class="sub">{{SUB}}</div>
+      <div class="steps">{{STEP1}}<i>→</i>{{STEP2}}<i>→</i>{{STEP3}}<i>→</i>{{STEP4}}</div>
+    </div>
+    <div class="right">
+      <div class="paper p1"></div>
+      <div class="paper p2">
+        <div class="bar b-name"></div>
+        <div class="bar b-role"></div>
+        <div class="sec"></div>
+        <div class="line w90"></div><div class="line w78"></div><div class="line w84"></div>
+        <div class="sec"></div>
+        <div class="line w90"></div><div class="line w62"></div>
+        <div class="sec"></div>
+        <div class="line w70"></div><div class="line w84"></div>
+      </div>
+      <div class="ring"><div class="inner"><div class="num">{{RING_NUM}}</div><div class="cap">{{RING_CAP}}</div></div></div>
+    </div>
+  </div>
+  <div class="foot">{{FOOTER}}</div>
+</body>
+</html>

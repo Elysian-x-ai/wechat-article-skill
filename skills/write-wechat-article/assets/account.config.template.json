@@ -1,0 +1,49 @@
+{
+  "_README": "复制到文章工作目录，改名 wechat-article.config.json。skill 从这里读账号相关信息，不要把这些细节写进 skill 本身。",
+
+  "account": {
+    "name": "",
+    "type": "personal-unverified",
+    "_type_options": [
+      "personal-unverified  个人未认证订阅号：正文不能放站外链接、无小程序、无网页授权、无素材/草稿箱 API",
+      "personal-verified    个人已认证",
+      "org-verified         企业/组织已认证：可用外链白名单与素材 API"
+    ],
+    "realNameDone": false,
+    "avatarAndNameSet": false,
+    "_publish_gate": "realNameDone 与 avatarAndNameSet 都为 true 才能发表和声明原创；否则只保存草稿"
+  },
+
+  "author": "",
+
+  "products": [
+    {
+      "name": "",
+      "url": "",
+      "relation": "own",
+      "_relation_options": ["own   自己的产品 → 写『我自己做的工具』，不写非推广声明", "third-party  别人的产品"],
+      "free_tier": "",
+      "paid_tier": ""
+    }
+  ],
+
+  "keywords": [
+    {
+      "keyword": "",
+      "reply": ""
+    }
+  ],
+
+  "tone": {
+    "avoid": [],
+    "_avoid_examples": ["非推广", "与作者无商业关系", "小伙伴", "赋能"]
+  },
+
+  "style": {
+    "default_preset": "tool-review",
+    "cover_template": "assets/cover-template.html",
+    "title_max": 64,
+    "digest_max": 120,
+    "cover_size": "900x383"
+  }
+}
