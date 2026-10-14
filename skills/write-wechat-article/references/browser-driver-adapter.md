@@ -55,6 +55,7 @@ npx playwright@latest open --channel chrome --user-data-dir ./.mp-profile https:
 
 ## 工具特有的坑
 
+- **浏览器窗口必须在前台可见**（宿主内嵌浏览器最容易忽略）。`document.visibilityState === "hidden"` 时：截图报 `NATIVE_BROWSER_VIEWPORT_UNAVAILABLE`；ProseMirror **根本不初始化**，快照里 `.ProseMirror` 数量为 `0`。两种表现都会被误判成"驱动坏了"或"粘贴姿势不对"，然后一头扎进 §6 只读锁的排查。**动手前先读一次 `document.visibilityState`，非 `visible` 就请用户把浏览器面板切到前台**，不要开始试别的插入方法。
 - **`evaluate_script` 类接口普遍只接受一个 `function` 参数**：多传 `uid` 等键会被拒（`params must NOT have additional properties`）。需要传参就写进函数体，或先挂到 `window` 上再在下次调用里读。
 - **超时是硬限制（本环境 15s）**：被放弃的异步脚本**会继续在页面里跑并改文档**。所以一次调用只做一件事，超时后先确认页面静默再动手。
 - **不同驱动的返回值序列化不同**：有的把 `DOMRect` 字段变成 `0`（需 `Number()` 转换），有的不支持返回 DOM 节点。**返回值只用字符串/数字/布尔的普通对象**，用 `JSON.stringify` 包一层最省事。

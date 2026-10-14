@@ -124,6 +124,8 @@ CDN URL 前缀有 `sz_mmbiz_png` 与 `mmbiz_png` 两种，别假设固定。
 
 **唯一解法**：注册 `beforeunload` 拦截 → `navigate_page` 回完整编辑 URL 重开会话 → 重新执行。这期间所有「粘贴没生效」都不是姿势问题，别去试别的插入位置。
 
+**先排除另一种情形**：如果 `.ProseMirror` 数量是 `0`（编辑器压根没建起来），那不是只读锁，是浏览器窗口不在前台可见，见 `browser-driver-adapter.md` 的 `visibilityState` 一条。重开会话解决不了它。
+
 ## 7. 接口约束（各家驱动通用的坑）
 
 - **执行 JS 的接口普遍只接受 `{function}` 一个键**，多传 `uid` 等参数报 「params must NOT have additional properties」。
